@@ -1,115 +1,115 @@
 # BitSpeak
 
-A command line tool for encoding, decoding and inspecting data
+<p align="center">
+  <img src="assets/logo.png" alt="BitSpeak logo" width="180">
+</p>
 
-BitSpeak works with binary, hex and base64. It can convert text and files, inspect file signatures, calculate SHA256 hashes and compare files.
+<p align="center">
+  <strong>A lightweight binary encoding and hashing CLI for Node.js.</strong>
+</p>
+
+<p align="center">
+  Encode, decode, verify, and hash files directly from your terminal.
+</p>
+
+---
 
 ## Features
 
-- Encode and decode text
-- Convert files between binary, hex and base64
-- Inspect file size, type and raw bytes
-- Calculate SHA256 hashes
-- Compare files to check data integrity
-- Process multiple files at once
-- Show progress during file conversion
-- Interactive terminal menu
-- No external dependencies
+- **Binary Encoding** — Encode files into BitSpeak's binary representation.
+- **Decoding** — Restore encoded files to their original content.
+- **Integrity Verification** — Verify that decoded output matches the original file.
+- **SHA-256 Hashing** — Generate hashes for integrity checks.
+- **Zero Dependencies** — Built with Node.js and no external packages.
+- **CLI-First** — Simple commands designed for terminal workflows.
 
 ## Requirements
 
 - Node.js
+- Git (optional, for cloning the repository)
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/LattesGit/bitspeak.git
+cd bitspeak
+```
+
+No external dependencies are required.
 
 ## Usage
 
-### Text
-
-```bash
-node bitspeak.js encode "Hello world"
-node bitspeak.js encode "Hello" --format hex
-node bitspeak.js encode "Hello" --format base64
-node bitspeak.js decode "01001000 01101001"
-```
-
-### Files
+### Encode a file
 
 ```bash
 node bitspeak.js --file encode app.js app.bits
+```
+
+### Decode a file
+
+```bash
 node bitspeak.js --file decode app.bits restored.js
-node bitspeak.js --file encode image.png image.b64 --format base64
-node bitspeak.js --file decode image.b64 restored.png --format base64
 ```
 
-Use `--force` to overwrite an existing output file.
-
-### Inspect files
+### Verify file integrity
 
 ```bash
-node bitspeak.js inspect file.bin
+node bitspeak.js verify app.js restored.js
 ```
 
-Displays basic file information, a type estimate, the first bytes and the SHA256 hash.
-
-### Hash files
+### Run the example
 
 ```bash
-node bitspeak.js hash file.bin
+node examples/basic.js
 ```
 
-### Compare files
+## Testing
+
+Run the test suite using Node.js's built-in test runner:
 
 ```bash
-node bitspeak.js verify original.bin restored.bin
+node --test
 ```
 
-Checks whether both files have the same size and SHA256 hash.
+## Project Structure
 
-### Batch processing
-
-```bash
-node bitspeak.js batch encode ./input ./encoded
-node bitspeak.js batch encode ./input ./encoded --recursive --format hex
-node bitspeak.js batch decode ./encoded ./restored --recursive
+```text
+bitspeak/
+├── bitspeak.js
+├── README.md
+├── LICENSE
+├── .gitignore
+├── assets/
+│   └── logo.png
+├── examples/
+│   └── basic.js
+└── test/
+    └── bitspeak.test.js
 ```
 
-Use `--recursive` to include files inside subdirectories.
+## Security and Integrity
 
-### Interactive mode
+BitSpeak provides encoding, decoding, and hashing utilities. **Encoding is not encryption** and should not be used to protect sensitive data.
 
-```bash
-node bitspeak.js interactive
-```
+SHA-256 hashes can help verify content integrity, but a hash alone does not establish the authenticity of a file.
 
-### Help
+## Contributing
 
-```bash
-node bitspeak.js help
-```
+Issues, bug reports, and pull requests are welcome.
 
-## Supported formats
-
-- `binary`
-- `hex`
-- `base64`
-
-Choose a format with `--format`. Binary is the default.
-
-## Module usage
-
-BitSpeak can also be used in other Node.js projects.
-
-```javascript
-const { encode, decode, hash } = require("./bitspeak.js");
-
-const text = "Hello world";
-const binary = encode(text);
-const restored = decode(binary).toString("utf8");
-
-console.log(binary);
-console.log(restored);
-console.log(hash(Buffer.from(text)));
-```
+1. Fork the repository.
+2. Create a feature branch.
+3. Make your changes and run the tests.
+4. Open a pull request.
 
 ## License
 
-MIT
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+<p align="center">
+  Made for the terminal.
+</p>
